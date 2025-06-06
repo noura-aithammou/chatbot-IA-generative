@@ -1,0 +1,66 @@
+<nav class="navbar navbar-expand-lg navbar-purple sticky-top">
+    <div class="container">
+        <a class="navbar-brand" href="{{ url_for('index') }}">
+            <i class="fas fa-heartbeat me-2"></i>{{ translations.site_title }}
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('index') }}">{{ translations.home }}</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="diseasesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ translations.diseases }}
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="diseasesDropdown">
+                        {% for disease in diseases %}
+                            <li>
+                                <a class="dropdown-item" href="{{ url_for('disease', disease_name=disease) }}">
+                                    {{ translations[disease + '_disease'] }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('chatbot') }}">{{ translations.chatbot }}</a>
+                </li>
+            </ul>
+            
+            <!-- Language Switcher -->
+            <div class="language-switcher">
+                <div class="dropdown">
+                    <button class="btn btn-sm btn-outline-light dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        {% if current_lang == 'en' %}
+                            <i class="fas fa-globe-americas"></i> English
+                        {% elif current_lang == 'fr' %}
+                            <i class="fas fa-globe-europe"></i> Français
+                        {% elif current_lang == 'ar' %}
+                            <i class="fas fa-globe-africa"></i> العربية
+                        {% endif %}
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
+                        <li>
+                            <a class="dropdown-item language-switch {% if current_lang == 'en' %}active{% endif %}" href="#" data-lang="en">
+                                <i class="fas fa-globe-americas"></i> English
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item language-switch {% if current_lang == 'fr' %}active{% endif %}" href="#" data-lang="fr">
+                                <i class="fas fa-globe-europe"></i> Français
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item language-switch {% if current_lang == 'ar' %}active{% endif %}" href="#" data-lang="ar">
+                                <i class="fas fa-globe-africa"></i> العربية
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>

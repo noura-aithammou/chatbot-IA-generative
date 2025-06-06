@@ -1,0 +1,183 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ translations.site_title }}{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero purple-gradient">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h1>{{ translations.hero_title }}</h1>
+                <p>{{ translations.hero_description }}</p>
+                <a href="#diseases" class="btn btn-light btn-lg">{{ translations.explore_diseases }}</a>
+            </div>
+            <div class="col-lg-6 text-center">
+                <img src="https://www.hck.ma/media/uploads/images/info_sante/Image__article_cellules_cancereuses.jpg" 
+                     alt="Medical illustration" class="img-fluid rounded" style="max-height: 400px;">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Disease Categories Section -->
+<section id="diseases" class="py-5">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-12 text-center">
+                <h2 class="section-title">{{ translations.disease_categories }}</h2>
+                <p class="section-description">{{ translations.select_disease }}</p>
+            </div>
+        </div>
+        
+        <div class="row">
+            <!-- Alzheimer's Disease -->
+            <div class="col-md-6 col-lg-4">
+                <div class="disease-card card h-100">
+                    <img src="https://kamranaghayev.com/wp-content/uploads/2023/12/brain-tumor-content-2.webp" class="card-img-top" alt="Alzheimer's Disease">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ translations.alzheimers_disease }}</h5>
+                        <p class="card-text">{{ translations.alzheimers_short }}</p>
+                        <a href="{{ url_for('disease', disease_name='alzheimers') }}" class="btn btn-purple">{{ translations.learn_more }}</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Parkinson's Disease -->
+            <div class="col-md-6 col-lg-4">
+                <div class="disease-card card h-100">
+                    <img src="https://blog.laval-virtual.com/wp-content/uploads/2020/03/medecine-operation-chirurgie-realite-augmentee-sante.png" class="card-img-top" alt="Parkinson's Disease">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ translations.parkinsons_disease }}</h5>
+                        <p class="card-text">{{ translations.parkinsons_short }}</p>
+                        <a href="{{ url_for('disease', disease_name='parkinsons') }}" class="btn btn-purple">{{ translations.learn_more }}</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Diabetes -->
+            <div class="col-md-6 col-lg-4">
+                <div class="disease-card card h-100">
+                    <img src="https://www.aquaportail.com/pictures1712/sang-fluide-corporel.jpg" class="card-img-top" alt="Diabetes">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ translations.diabetes }}</h5>
+                        <p class="card-text">{{ translations.diabetes_short }}</p>
+                        <a href="{{ url_for('disease', disease_name='diabetes') }}" class="btn btn-purple">{{ translations.learn_more }}</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Cancer -->
+            <div class="col-md-6 col-lg-4">
+                <div class="disease-card card h-100">
+                    <img src="https://cdn.futura-sciences.com/cdn-cgi/image/width=1024,quality=50,format=auto/sources/images/2-cancer.jpeg" class="card-img-top" alt="Cancer">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ translations.cancer }}</h5>
+                        <p class="card-text">{{ translations.cancer_short }}</p>
+                        <a href="{{ url_for('disease', disease_name='cancer') }}" class="btn btn-purple">{{ translations.learn_more }}</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Heart Disease -->
+            <div class="col-md-6 col-lg-4">
+                <div class="disease-card card h-100">
+                    <img src="https://cdn.futura-sciences.com/cdn-cgi/image/width=1024,quality=60,format=auto/sources/images/dossier/1474/01-intro-1474.jpg" class="card-img-top" alt="Heart Disease">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ translations.heart_disease }}</h5>
+                        <p class="card-text">{{ translations.heart_disease_short }}</p>
+                        <a href="{{ url_for('disease', disease_name='heart_disease') }}" class="btn btn-purple">{{ translations.learn_more }}</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- COVID-19 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="disease-card card h-100">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIbSHLkJV6GXsYnVQpdVSbSDpDOOqp-djSwSpTjDVyXbNw2JwfdxYUV7KIldfOgutVuAI&usqp=CAU" class="card-img-top" alt="COVID-19">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ translations.covid19 }}</h5>
+                        <p class="card-text">{{ translations.covid19_short }}</p>
+                        <a href="{{ url_for('disease', disease_name='covid19') }}" class="btn btn-purple">{{ translations.learn_more }}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- DNA Illustrations Section -->
+<section class="medical-info py-5 bg-light">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-12 text-center">
+                <h2 class="section-title">{{ translations.understanding_genetics }}</h2>
+                <p class="section-description">{{ translations.genetics_description }}</p>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-4">
+                <div class="gallery-img">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-4QSeetCbovf27QR-qcMSj65NTk4ZMOl4Yw&s" class="img-fluid" alt="DNA Structure">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="gallery-img">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-4QSeetCbovf27QR-qcMSj65NTk4ZMOl4Yw&s" class="img-fluid" alt="DNA Research">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="gallery-img">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-4QSeetCbovf27QR-qcMSj65NTk4ZMOl4Yw&s" class="img-fluid" alt="DNA Sequencing">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action Section -->
+<section class="cta purple-gradient py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center text-white">
+                <h2>{{ translations.have_questions }}</h2>
+                <p>{{ translations.chat_with_ai }}</p>
+                <button class="btn btn-light btn-lg mt-3" id="open-chatbot">{{ translations.ask_chatbot }}</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Modal for Image Gallery -->
+<div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <img id="modalImage" src="" class="img-fluid" alt="Large Image">
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.getElementById('open-chatbot').addEventListener('click', function() {
+        document.getElementById('chatbot-container').classList.add('expanded');
+        document.getElementById('chatbot-toggle').innerHTML = '<i class="fas fa-chevron-down"></i>';
+        
+        // Add welcome message if there are no messages yet
+        const messagesContainer = document.getElementById('chatbot-messages');
+        if (messagesContainer.children.length === 0) {
+            const messageElement = document.createElement('div');
+            messageElement.className = 'message bot-message';
+            messageElement.textContent = translations.chatbot_welcome;
+            messagesContainer.appendChild(messageElement);
+        }
+    });
+</script>
+{% endblock %}

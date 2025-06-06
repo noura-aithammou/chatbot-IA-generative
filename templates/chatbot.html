@@ -1,0 +1,281 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ translations.medical_chatbot }} - {{ translations.site_title }}{% endblock %}
+
+{% block content %}
+<!-- Chatbot Hero Section -->
+<section class="hero purple-gradient">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h1>{{ translations.medical_chatbot }}</h1>
+                <p>{{ translations.chatbot_description }}</p>
+            </div>
+            <div class="col-lg-6 text-center">
+                <img src="https://pixabay.com/get/g6139f6d58edb2a6984c4cb1bfd354b9a886785b0d24aab9cf68809a71519b8362754afd55da1a68d413a01283d3bb98d30e9e8acab0421679877e754f74d1715_1280.jpg" 
+                     alt="AI Medical Assistant" class="img-fluid rounded" style="max-height: 400px;">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Chatbot Features -->
+<section class="py-5">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-12 text-center">
+                <h2>{{ translations.how_chatbot_works }}</h2>
+                <p class="lead">{{ translations.chatbot_capabilities }}</p>
+            </div>
+        </div>
+        
+        <div class="row">
+            <!-- Feature 1 -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center">
+                        <div class="feature-icon mb-3">
+                            <i class="fas fa-question-circle fa-3x text-purple"></i>
+                        </div>
+                        <h4>{{ translations.ask_questions }}</h4>
+                        <p>{{ translations.ask_questions_desc }}</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Feature 2 -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center">
+                        <div class="feature-icon mb-3">
+                            <i class="fas fa-image fa-3x text-purple"></i>
+                        </div>
+                        <h4>{{ translations.upload_images }}</h4>
+                        <p>{{ translations.upload_images_desc }}</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Feature 3 -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center">
+                        <div class="feature-icon mb-3">
+                            <i class="fas fa-language fa-3x text-purple"></i>
+                        </div>
+                        <h4>{{ translations.multilingual }}</h4>
+                        <p>{{ translations.multilingual_desc }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Example Questions -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-12 text-center">
+                <h2>{{ translations.example_questions }}</h2>
+                <p>{{ translations.try_these_questions }}</p>
+            </div>
+        </div>
+        
+        <div class="row">
+            {% for disease in diseases %}
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ translations[disease + '_disease'] }}</h5>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item border-0 ps-0">
+                                    <button class="btn btn-link p-0 example-question text-decoration-none text-start text-purple fw-normal">
+                                        {{ translations.what_is }} {{ translations[disease + '_disease'] }}?
+                                    </button>
+                                </li>
+                                <li class="list-group-item border-0 ps-0">
+                                    <button class="btn btn-link p-0 example-question text-decoration-none text-start text-purple fw-normal">
+                                        {{ translations.symptoms_of }} {{ translations[disease + '_disease'] }}?
+                                    </button>
+                                </li>
+                                <li class="list-group-item border-0 ps-0">
+                                    <button class="btn btn-link p-0 example-question text-decoration-none text-start text-purple fw-normal">
+                                        {{ translations.how_to_prevent }} {{ translations[disease + '_disease'] }}?
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Expanded Chatbot View -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <div class="card border-0 shadow">
+                    <div class="card-header purple-gradient text-white">
+                        <h4 class="mb-0">{{ translations.medical_chatbot }}</h4>
+                    </div>
+                    <div class="card-body">
+                        <div id="expanded-chat-messages" class="chat-messages mb-3" style="height: 300px; overflow-y: auto;">
+                            <div class="message bot-message">
+                                {{ translations.chatbot_welcome }}
+                            </div>
+                        </div>
+                        <form id="expanded-chat-form">
+                            <div class="input-group">
+                                <input type="text" id="expanded-message-input" class="form-control" placeholder="{{ translations.type_message }}...">
+                                <label for="expanded-file-input" class="btn btn-outline-secondary">
+                                    <i class="fas fa-image"></i>
+                                </label>
+                                <input type="file" id="expanded-file-input" style="display: none;" accept="image/*">
+                                <button type="submit" class="btn btn-purple">
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                            </div>
+                            <div id="expanded-file-preview" class="mt-2"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block chatbot %}
+<!-- Chatbot disabled on this page since we have the expanded view -->
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Handle example questions
+        const exampleQuestions = document.querySelectorAll('.example-question');
+        const expandedMessageInput = document.getElementById('expanded-message-input');
+        const expandedChatMessages = document.getElementById('expanded-chat-messages');
+        const expandedChatForm = document.getElementById('expanded-chat-form');
+        const expandedFileInput = document.getElementById('expanded-file-input');
+        const expandedFilePreview = document.getElementById('expanded-file-preview');
+        
+        // Handle example question clicks
+        exampleQuestions.forEach(question => {
+            question.addEventListener('click', function() {
+                const questionText = this.textContent.trim();
+                expandedMessageInput.value = questionText;
+                
+                // Scroll the expanded-message-input into view
+                expandedMessageInput.scrollIntoView({ behavior: 'smooth' });
+                expandedMessageInput.focus();
+            });
+        });
+        
+        // Show filename when a file is selected
+        expandedFileInput.addEventListener('change', function() {
+            if (expandedFileInput.files.length > 0) {
+                const fileName = expandedFileInput.files[0].name;
+                expandedFilePreview.innerHTML = `<div class="alert alert-info">${translations.file_selected}: ${fileName} <button type="button" class="btn-close float-end" id="clear-file"></button></div>`;
+                
+                // Handle clear file button
+                document.getElementById('clear-file').addEventListener('click', function() {
+                    expandedFileInput.value = '';
+                    expandedFilePreview.innerHTML = '';
+                });
+            } else {
+                expandedFilePreview.innerHTML = '';
+            }
+        });
+        
+        // Handle expanded chat form submission
+        expandedChatForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const message = expandedMessageInput.value.trim();
+            const hasFile = expandedFileInput.files.length > 0;
+            
+            if (!message && !hasFile) {
+                return;
+            }
+            
+            // Add user message to chat
+            if (message) {
+                addMessage(message, 'user-message');
+            }
+            
+            // Clear input field
+            expandedMessageInput.value = '';
+            
+            // Create FormData to send both text and file
+            const formData = new FormData();
+            formData.append('query', message);
+            
+            if (hasFile) {
+                formData.append('image', expandedFileInput.files[0]);
+            }
+            
+            // Show loading indicator
+            addMessage(translations.loading + '...', 'bot-message loading');
+            
+            // Send the message to the server
+            fetch('/api/chat', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok: ' + response.statusText);
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Remove loading indicator
+                const loadingElement = document.querySelector('.loading');
+                if (loadingElement) {
+                    loadingElement.remove();
+                }
+                
+                if (data.error) {
+                    addMessage(translations.error_occurred + ': ' + data.error, 'bot-message error');
+                } else {
+                    addMessage(data.answer, 'bot-message');
+                }
+                
+                // Clear file input
+                expandedFileInput.value = '';
+                expandedFilePreview.innerHTML = '';
+            })
+            .catch(error => {
+                // Remove loading indicator
+                const loadingElement = document.querySelector('.loading');
+                if (loadingElement) {
+                    loadingElement.remove();
+                }
+                
+                console.error('Error:', error);
+                addMessage(translations.error_occurred + ': ' + error.message, 'bot-message error');
+                
+                // Clear file input
+                expandedFileInput.value = '';
+                expandedFilePreview.innerHTML = '';
+            });
+        });
+        
+        // Add a message to the expanded chat
+        function addMessage(message, className) {
+            const messageElement = document.createElement('div');
+            messageElement.className = 'message ' + className;
+            messageElement.textContent = message;
+            expandedChatMessages.appendChild(messageElement);
+            
+            // Scroll to bottom
+            expandedChatMessages.scrollTop = expandedChatMessages.scrollHeight;
+        }
+    });
+</script>
+{% endblock %}

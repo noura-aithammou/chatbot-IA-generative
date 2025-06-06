@@ -1,0 +1,181 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ translations[disease + '_disease'] }} - {{ translations.site_title }}{% endblock %}
+
+{% block content %}
+<!-- Disease Hero Section -->
+<section class="hero purple-gradient">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h1>{{ translations[disease + '_disease'] }}</h1>
+                <p>{{ translations[disease + '_description'] }}</p>
+            </div>
+            <div class="col-lg-6 text-center">
+                {% if disease_images and disease_images|length > 0 %}
+                <img src="{{ disease_images[0] }}" alt="{{ translations[disease + '_disease'] }}" class="img-fluid rounded" style="max-height: 400px;">
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Disease Information -->
+<section class="medical-info py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <!-- Overview -->
+                <div class="info-card">
+                    <h3>{{ translations.overview }}</h3>
+                    <p>{{ translations[disease + '_overview'] }}</p>
+                </div>
+                
+                <!-- Symptoms -->
+                <div class="info-card">
+                    <h3>{{ translations.symptoms }}</h3>
+                    <p>{{ translations[disease + '_symptoms'] }}</p>
+                    <ul>
+                        {% for i in range(1, 6) %}
+                            {% if translations[disease + '_symptom_' + i|string] %}
+                                <li>{{ translations[disease + '_symptom_' + i|string] }}</li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+                
+                <!-- Causes -->
+                <div class="info-card">
+                    <h3>{{ translations.causes }}</h3>
+                    <p>{{ translations[disease + '_causes'] }}</p>
+                </div>
+                
+                <!-- Treatments -->
+                <div class="info-card">
+                    <h3>{{ translations.treatments }}</h3>
+                    <p>{{ translations[disease + '_treatments'] }}</p>
+                    <ul>
+                        {% for i in range(1, 6) %}
+                            {% if translations[disease + '_treatment_' + i|string] %}
+                                <li>{{ translations[disease + '_treatment_' + i|string] }}</li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+                
+                <!-- Prevention -->
+                <div class="info-card">
+                    <h3>{{ translations.prevention }}</h3>
+                    <p>{{ translations[disease + '_prevention'] }}</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-4">
+                <!-- Related Images -->
+                <div class="sidebar-card mb-4">
+                    <h4>{{ translations.related_images }}</h4>
+                    {% if disease_images %}
+                        {% for image in disease_images %}
+                            <div class="gallery-img">
+                                <img src="{{ image }}" class="img-fluid mb-3" alt="{{ translations[disease + '_disease'] }}">
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                
+                <!-- Related Diseases -->
+                <div class="sidebar-card mb-4">
+                    <h4>{{ translations.related_diseases }}</h4>
+                    <ul class="list-group">
+                        {% for related_disease in diseases %}
+                            {% if related_disease != disease %}
+                                <li class="list-group-item">
+                                    <a href="{{ url_for('disease', disease_name=related_disease) }}">
+                                        {{ translations[related_disease + '_disease'] }}
+                                    </a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Genetic Information -->
+<section class="medical-info py-5 bg-light">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-12 text-center">
+                <h2>{{ translations.genetic_factors }}</h2>
+                <p>{{ translations[disease + '_genetic'] }}</p>
+            </div>
+        </div>
+        
+        <div class="row">
+            {% for image in dna_images %}
+                <div class="col-md-4">
+                    <div class="gallery-img">
+                        <img src="{{ image }}" class="img-fluid" alt="DNA Illustration">
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Ask Chatbot Section -->
+<section class="cta purple-gradient py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center text-white">
+                <h2>{{ translations.questions_about }} {{ translations[disease + '_disease'] }}?</h2>
+                <p>{{ translations.chat_with_ai }}</p>
+                <button class="btn btn-light btn-lg mt-3" id="open-chatbot">{{ translations.ask_chatbot }}</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Modal for Image Gallery -->
+<div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <img id="modalImage" src="" class="img-fluid" alt="Large Image">
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.getElementById('open-chatbot').addEventListener('click', function() {
+        document.getElementById('chatbot-container').classList.add('expanded');
+        document.getElementById('chatbot-toggle').innerHTML = '<i class="fas fa-chevron-down"></i>';
+        
+        // Add welcome message if there are no messages yet
+        const messagesContainer = document.getElementById('chatbot-messages');
+        if (messagesContainer.children.length === 0) {
+            const messageElement = document.createElement('div');
+            messageElement.className = 'message bot-message';
+            messageElement.textContent = translations.chatbot_welcome;
+            messagesContainer.appendChild(messageElement);
+        }
+        
+        // Add disease-specific suggestion
+        const diseaseMessage = document.createElement('div');
+        diseaseMessage.className = 'message bot-message';
+        diseaseMessage.textContent = "{{ translations.ask_about }} {{ translations[disease + '_disease'] }}?";
+        messagesContainer.appendChild(diseaseMessage);
+        
+        // Scroll to bottom
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    });
+</script>
+{% endblock %}

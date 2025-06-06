@@ -1,0 +1,50 @@
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mb-4 mb-md-0">
+                <h5>{{ translations.site_title }}</h5>
+                <p>{{ translations.footer_description }}</p>
+            </div>
+            <div class="col-md-4 mb-4 mb-md-0">
+                <h5>{{ translations.quick_links }}</h5>
+                <ul class="list-unstyled">
+                    <li><a href="{{ url_for('index') }}">{{ translations.home }}</a></li>
+                    <li><a href="{{ url_for('chatbot') }}">{{ translations.chatbot }}</a></li>
+                    {% for disease in diseases[:3] %}
+                        <li>
+                            <a href="{{ url_for('disease', disease_name=disease) }}">
+                                {{ translations[disease + '_disease'] }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h5>{{ translations.languages }}</h5>
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="#" class="language-switch" data-lang="en">
+                            <i class="fas fa-globe-americas"></i> English
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="language-switch" data-lang="fr">
+                            <i class="fas fa-globe-europe"></i> Français
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="language-switch" data-lang="ar">
+                            <i class="fas fa-globe-africa"></i> العربية
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <hr class="mt-4 mb-4" style="border-color: rgba(255, 255, 255, 0.2);">
+        <div class="row">
+            <div class="col-12 text-center">
+                <p class="mb-0">&copy; 2025 {{ translations.site_title }}. {{ translations.all_rights_reserved }}</p>
+            </div>
+        </div>
+    </div>
+</footer>

@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+  <defs>
+    <radialGradient id="cellGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" stop-color="#e8f5e9" />
+      <stop offset="70%" stop-color="#81c784" />
+      <stop offset="100%" stop-color="#43a047" />
+    </radialGradient>
+    <filter id="cellBlur" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="3" />
+    </filter>
+  </defs>
+  
+  <!-- Cell membrane -->
+  <circle cx="100" cy="100" r="80" fill="url(#cellGradient)" opacity="0.8" />
+  <circle cx="100" cy="100" r="80" fill="none" stroke="#2e7d32" stroke-width="2" stroke-dasharray="4 2" />
+  
+  <!-- Cell nucleus -->
+  <circle cx="100" cy="100" r="30" fill="#bbdefb" opacity="0.9" stroke="#1565c0" stroke-width="1.5" />
+  
+  <!-- Nucleus details -->
+  <circle cx="90" cy="95" r="5" fill="#1565c0" opacity="0.7" />
+  <circle cx="110" cy="105" r="7" fill="#1565c0" opacity="0.5" />
+  <circle cx="95" cy="110" r="4" fill="#1565c0" opacity="0.6" />
+  
+  <!-- Organelles -->
+  <!-- Mitochondria -->
+  <ellipse cx="70" cy="70" rx="15" ry="8" fill="#ffcc80" stroke="#e65100" stroke-width="1" transform="rotate(-30,70,70)" />
+  <ellipse cx="70" cy="70" rx="10" ry="5" fill="none" stroke="#e65100" stroke-width="0.5" transform="rotate(-30,70,70)" />
+  
+  <ellipse cx="140" cy="120" rx="15" ry="8" fill="#ffcc80" stroke="#e65100" stroke-width="1" transform="rotate(45,140,120)" />
+  <ellipse cx="140" cy="120" rx="10" ry="5" fill="none" stroke="#e65100" stroke-width="0.5" transform="rotate(45,140,120)" />
+  
+  <!-- Endoplasmic reticulum -->
+  <path d="M60,130 Q70,140 80,130 Q90,120 100,130 Q110,140 120,130" fill="none" stroke="#673ab7" stroke-width="1.5" />
+  <path d="M60,135 Q70,145 80,135 Q90,125 100,135 Q110,145 120,135" fill="none" stroke="#673ab7" stroke-width="1.5" />
+  
+  <!-- Golgi apparatus -->
+  <path d="M130,70 Q140,65 150,70" fill="none" stroke="#009688" stroke-width="2" />
+  <path d="M132,75 Q142,70 152,75" fill="none" stroke="#009688" stroke-width="2" />
+  <path d="M134,80 Q144,75 154,80" fill="none" stroke="#009688" stroke-width="2" />
+  
+  <!-- Lysosomes -->
+  <circle cx="70" cy="110" r="5" fill="#f48fb1" stroke="#c2185b" stroke-width="0.5" />
+  <circle cx="125" cy="85" r="4" fill="#f48fb1" stroke="#c2185b" stroke-width="0.5" />
+  <circle cx="140" cy="95" r="3" fill="#f48fb1" stroke="#c2185b" stroke-width="0.5" />
+  
+  <!-- Vesicles -->
+  <circle cx="55" cy="95" r="3" fill="#b2dfdb" stroke="#00796b" stroke-width="0.5" />
+  <circle cx="65" cy="85" r="2" fill="#b2dfdb" stroke="#00796b" stroke-width="0.5" />
+  <circle cx="120" cy="110" r="2.5" fill="#b2dfdb" stroke="#00796b" stroke-width="0.5" />
+  <circle cx="115" cy="60" r="3.5" fill="#b2dfdb" stroke="#00796b" stroke-width="0.5" />
+  
+  <!-- Cell membrane details for more visual interest -->
+  <g opacity="0.6" filter="url(#cellBlur)">
+    <circle cx="100" cy="100" r="78" fill="none" stroke="#a5d6a7" stroke-width="8" stroke-dasharray="1 20" />
+    <circle cx="100" cy="100" r="78" fill="none" stroke="#a5d6a7" stroke-width="8" stroke-dasharray="10 15" transform="rotate(60,100,100)" />
+  </g>
+</svg>
